@@ -74,6 +74,13 @@
 
         #print-section {
             display: none; /* Hide print section initially */
+            margin-top: 40px;
+        }
+
+        #certificate {
+            border: 2px solid #3498db;
+            padding: 20px;
+            display: none; /* Hide certificate initially */
         }
 
         #progress-bar {
@@ -113,9 +120,13 @@
     <div id="result" class="result"></div>
 
     <div id="print-section" class="question-container">
-        <h2>Exam Results</h2>
-        <p id="score-output"></p>
-        <button onclick="printResults()">Print Results</button>
+        <h2>Certificate of Appreciation</h2>
+        <div id="certificate">
+            <p>This certifies that <strong id="cert-name"></strong></p>
+            <p>has successfully completed the Cisco Exam.</p>
+            <p>Your score: <strong id="cert-score"></strong> out of 50.</p>
+        </div>
+        <button onclick="printResults()">Print Certificate</button>
     </div>
 
     <script>
@@ -145,8 +156,7 @@
             { question: "Which of the following is a widely used network protocol?", options: ["TCP/IP", "UDP", "HTTP", "All of the above"], answer: "All of the above" },
             { question: "What does 'ping' command do?", options: ["Checks connectivity to a network", "Measures bandwidth", "Sends data", "Creates a backup"], answer: "Checks connectivity to a network" },
             { question: "What is the function of the transport layer?", options: ["Ensures complete data transfer", "Routes packets", "Handles sessions", "Encrypts data"], answer: "Ensures complete data transfer" },
-            { question: "Which of the following is NOT a network topology?", options: ["Star", "Ring", "Bus", "Linear"], answer: "Linear" },
-            { question: "What is a VLAN?", options: ["Virtual Local Area Network", "Virtual Link Area Network", "Visual Local Area Network", "Variable Link Area Network"], answer: "Virtual Local Area Network" },
+            { question: "What type of address is used for a specific device on a local network?", options: ["MAC Address", "IP Address", "URL", "Hostname"], answer: "IP Address" },
             { question: "What does the term 'latency' refer to?", options: ["Delay in data transmission", "Speed of data transfer", "Packet loss", "Data corruption"], answer: "Delay in data transmission" },
             { question: "Which protocol is used to securely connect to a remote server?", options: ["SSH", "FTP", "Telnet", "SMTP"], answer: "SSH" },
             { question: "What is a DHCP server responsible for?", options: ["Assigning IP addresses", "Filtering traffic", "Monitoring network", "Routing packets"], answer: "Assigning IP addresses" },
@@ -197,6 +207,11 @@
             // Update progress bar
             const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
             document.getElementById("progress").style.width = `${progress}%`;
+            
+            // Show submit button after first question
+            if (currentQuestionIndex === 0) {
+                document.getElementById("submit-button").style.display = "inline-block";
+            }
         }
 
         // Function to handle the next question
@@ -214,7 +229,9 @@
                 } else {
                     document.getElementById("exam-container").style.display = "none";
                     document.getElementById("print-section").style.display = "block";
-                    document.getElementById("score-output").innerText = `${document.getElementById("name-input").value}, your score is ${score} out of ${questions.length}.`;
+                    document.getElementById("cert-name").innerText = document.getElementById("name-input").value;
+                    document.getElementById("cert-score").innerText = `${score}`;
+                    document.getElementById("certificate").style.display = "block"; // Show certificate
                 }
             } else {
                 alert("Please select an answer.");
@@ -234,7 +251,9 @@
             }
             document.getElementById("exam-container").style.display = "none";
             document.getElementById("print-section").style.display = "block";
-            document.getElementById("score-output").innerText = `${document.getElementById("name-input").value}, your score is ${score} out of ${questions.length}.`;
+            document.getElementById("cert-name").innerText = document.getElementById("name-input").value;
+            document.getElementById("cert-score").innerText = `${score}`;
+            document.getElementById("certificate").style.display = "block"; // Show certificate
         }
 
         // Function to finish the exam
