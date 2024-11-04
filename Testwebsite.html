@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cisco Exam</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+            background-color: #add8e6; /* Light blue background */
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #header {
+            margin: 20px auto;
+            width: 10in;
+            height: 2in;
+            background-image: url('https://t3.ftcdn.net/jpg/01/10/39/34/360_F_110393413_ve9rWniGDKUZWv5NbH96Kf9raN25hDhS.jpg'); /* Cisco Image */
+            background-size: cover;
+            border-radius: 8px;
+        }
+
+        .question-container {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
+        .options {
+            text-align: left;
+        }
+
+        .options label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+
+        #print-section {
+            display: none; /* Hide print section initially */
+        }
+
+        #speed-test-result {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.fast.com/js/fast.com.js"></script>
+</head>
+<body>
+
+    <div id="header"></div>
+    <h1>Cisco Exam</h1>
+    <div id="exam-container" class="question-container">
+        <input type="text" id="name-input" placeholder="Enter your name" required>
+        <div id="question-section">
+            <!-- Questions will be dynamically added here -->
+        </div>
+
+        <button onclick="submitExam()">Submit Exam</button>
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <div id="print-section" class="question-container">
+        <h2>Exam Results</h2>
+        <p id="score-output"></p>
+        <button onclick="printResults()">Print Results</button>
+    </div>
+
+    <div id="speed-test">
+        <h2>Speed Test</h2>
+        <button onclick="startSpeedTest()">Check Internet Speed</button>
+        <div id="speed-test-result">
+            <h3>Speed Test Results:</h3>
+            <p id="download-speed"></p>
+            <p id="upload-speed"></p>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "What is the purpose of a router?", options: ["To route packets", "To store data", "To create web pages", "To display images"], answer: "To route packets" },
+            { question: "What does the OSI model stand for?", options: ["Open System Interconnection", "Operating System Interaction", "Open Source Interchange", "Online System Interruption"], answer: "Open System Interconnection" },
+            { question: "Which layer is responsible for end-to-end communication?", options: ["Transport", "Network", "Session", "Application"], answer: "Transport" },
+            { question: "Which device works at Layer 2 of the OSI model?", options: ["Switch", "Router", "Firewall", "Server"], answer: "Switch" },
+            { question: "What is an IP address used for?", options: ["Identifying devices on a network", "Accessing the internet", "Storing data", "Deleting data"], answer: "Identifying devices on a network" }
+        ];
+
+        let score = 0;
+
+        // Function to render questions
+        function renderQuestions() {
+            const questionSection = document.getElementById("question-section");
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.className = "question";
+                questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+                
+                const optionsDiv = document.createElement("div");
+                optionsDiv.className = "options";
+                
+                q.options.forEach(option => {
+                    const optionLabel = document.createElement("label");
+                    optionLabel.innerHTML = `<input type="radio" name="question${index}" value="${option}"> ${option}`;
+                    optionsDiv.appendChild(optionLabel);
+                });
+
+                questionDiv.appendChild(optionsDiv);
+                questionSection.appendChild(questionDiv);
+            });
+        }
+
+        // Function to submit the exam and calculate the score
+        function submitExam() {
+            const name = document.getElementById("name-input").value.trim();
+            if (!name) {
+                alert("Please enter your name.");
+                return;
+            }
+
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedOption && selectedOption.value === q.answer) {
+                    score++;
+                }
+            });
+
+            const totalQuestions = questions.length;
+            const percentage = (score / totalQuestions) * 100;
+
+            // Show results and hide exam container
+            document.getElementById("result").innerHTML = `${name}, your Score: ${score} out of ${totalQuestions} (${percentage.toFixed(2)}%)`;
+            document.getElementById("score-output").innerHTML = `${name}, your Score: ${score} out of ${totalQuestions} (${percentage.toFixed(2)}%)`;
+            document.getElementById("print-section").style.display = "block";
+            document.getElementById("exam-container").style.display = "none";
+            
+            // Disable all radio buttons after submission
+            document.querySelectorAll("input[type=radio]").forEach(input => input.disabled = true);
+        }
+
+        // Function to print the exam results
+        function printResults() {
+            window.print();
+        }
+
+        // Function to start the speed test
+        function startSpeedTest() {
+            document.getElementById("download-speed").innerText = "Testing download speed...";
+            document.getElementById("upload-speed").innerText = "Testing upload speed...";
+            document.getElementById("speed-test-result").style.display = "none";
+
+            fast.com.getSpeed(function(downloadSpeed, uploadSpeed) {
+                document.getElementById("download-speed").innerText = `Download Speed: ${downloadSpeed} Mbps`;
+                document.getElementById("upload-speed").innerText = `Upload Speed: ${uploadSpeed} Mbps`;
+                document.getElementById("speed-test-result").style.display = "block";
+            });
+        }
+
+        // Render questions on page load
+        renderQuestions();
+    </script>
+</body>
+</html>
