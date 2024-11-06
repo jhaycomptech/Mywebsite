@@ -8,58 +8,35 @@
 /* Basic styling */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #add8e6; /* Light blue background */
+    margin: 0;
+    padding: 0;
+    background-color: #add8e6;
+    text-align: center;
 }
 
 h1 {
-    color: #333;
-    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    margin: 10px;
 }
 
 #header {
     margin: 20px auto;
-    width: 10in;
-    height: 2in;
+    width: 100%;
     background-image: url('https://t3.ftcdn.net/jpg/01/10/39/34/360_F_110393413_ve9rWniGDKUZWv5NbH96Kf9raN25hDhS.jpg');
     background-size: cover;
     border-radius: 8px;
-}
-
-.container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.exam-column, .video-column {
-    flex: 1;
-    min-width: 300px;
-    max-width: 600px;
-}
-
-.question-container {
     padding: 20px;
-    background-color: #fff;
+}
+
+.exam-container, .questionnaire {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.question {
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    text-align: left;
-}
-
-.options {
-    text-align: left;
-}
-
-.options label {
-    display: block;
-    margin: 5px 0;
-    cursor: pointer;
+    width: 100%;
+    max-width: 900px;
 }
 
 button {
@@ -77,258 +54,196 @@ button:hover {
     background-color: #2980b9;
 }
 
-.result {
-    font-size: 1.2em;
-    color: #2c3e50;
-    margin-top: 20px;
-}
-
-#print-section {
-    display: none;
-    margin-top: 40px;
+.question {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: left;
 }
 
 #certificate {
-    border: 2px solid #3498db;
-    padding: 20px;
     display: none;
-}
-
-#progress-bar-container {
-    display: flex;
-    justify-content: left;
-    margin: 20px 0;
-}
-
-.circle-progress {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 10px solid lightgray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-right: 20px; /* Position on the left side */
-}
-
-.circle-progress::before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    position: absolute;
-    background-color: #3498db;
-    clip-path: circle(50% at 50% 50%);
-}
-
-.progress-text {
-    position: absolute;
-    z-index: 1;
-    color: #fff;
-}
-
-.video-container iframe {
-    width: 100%;
-    height: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
     border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
 }
 
-.question-count-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.question-count-buttons button {
-    background-color: #2ecc71;
-    font-weight: bold;
-}
-
-.question-count-buttons button:hover {
-    background-color: #27ae60;
-}
-
-#refresh-button {
-    font-size: 1.2em;
-    color: #3498db;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
+@media (max-width: 768px) {
+    h1 { font-size: 20px; }
+    button { font-size: 14px; padding: 8px 16px; }
 }
 </style>
 </head>
 <body>
 
-<div id="header"></div>
-<h1>Fiber Optic Exam</h1>
-<p style="text-align:center;">Practice your knowledge and skills to prepare for the CFOT certification!</p>
-
-<div class="question-count-buttons">
-    <button onclick="setQuestionCount(10)">10 Questions</button>
-    <button onclick="setQuestionCount(20)">20 Questions</button>
-    <button onclick="payFor50Questions()">50 Questions - Pay 99 Pesos</button>
-    <button id="refresh-button" onclick="refreshPage()">&#x21bb;</button>
+<div id="header">
+    <h1>FIBER OPTICS CFOT EXAM</h1>
+    <h1>Cisco Fiber Optic Exam - Practice and Learn!</h1>
 </div>
 
-<div class="container">
-    <!-- Exam Column -->
-    <div class="exam-column">
-        <div id="exam-container" class="question-container">
-            <input type="text" id="name-input" placeholder="Enter your name" required>
-            <div id="progress-bar-container">
-                <div class="circle-progress">
-                    <div class="progress-text" id="progress-text">0%</div>
-                </div>
-                <div id="question-section">
-                    <!-- Questions will be dynamically added here -->
-                </div>
-            </div>
-            
-            <button onclick="nextQuestion()">Next Question</button>
-            <button onclick="submitExam()" id="submit-button" style="display:none;">Submit Exam</button>
-            <button onclick="finishExam()" id="finish-button" style="display:none;">Finish Exam</button>
-        </div>
-
-        <div id="result" class="result"></div>
-
-        <div id="print-section" class="question-container">
-            <h2>Certificate of Appreciation</h2>
-            <div id="certificate">
-                <p>This certifies that <strong id="cert-name"></strong></p>
-                <p>has successfully completed the Fiber Optic CFOT Exam.</p>
-                <p>Your score: <strong id="cert-score"></strong> out of <strong id="cert-total"></strong>.</p>
-            </div>
-            <button onclick="printResults()">Print Certificate</button>
-        </div>
+<div class="exam-container">
+    <!-- Start Exam Section -->
+    <div>
+        <input type="text" id="name-input" placeholder="Enter your name" required>
+        
+        <button onclick="startExam(10)">10 Questions</button>
+        <button onclick="startExam(20)">20 Questions</button>
+        <button onclick="startExam(50)">50 Questions (₱99 Fee)</button>
     </div>
+</div>
 
-    <!-- Video Column -->
-    <div class="video-column">
-        <div class="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/watch?v=Tm8LGxTLtQk" 
-                    title="Fiber Optic Training" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-            </iframe>
-        </div>
-    </div>
+<!-- Questionnaire Section -->
+<div class="questionnaire" id="questionnaire" style="display: none;">
+    <h2>Answer the Questions Below</h2>
+    <div id="questions-container"></div>
+    <button onclick="submitExam()">Submit Exam</button>
+</div>
+
+<!-- Certificate Section -->
+<div id="certificate">
+    <h2>Certificate of Appreciation</h2>
+    <p>Congratulations, <span id="certificate-name"></span>!</p>
+    <p>Your Score: <span id="certificate-score"></span>/100</p>
+	
+	<p>“The only way that we can live is if we grow. The only way we can grow is if we change. The only way we can change is if we learn"<p>
+	
+    
+	
+	<p>Thank you for your hard work and dedication!</p>
+    <button onclick="printCertificate()">Print Certificate</button>
 </div>
 
 <script>
-let score = 0;
-let currentQuestionIndex = 0;
-let totalQuestions = 10; // Default to 10 questions
-
-const questions = [
-    { question: "What does CFOT stand for?", options: ["Certified Fiber Optic Technician", "Certified Fiber Optic Trainer", "Central Fiber Optic Training", "Core Fiber Optical Technician"], answer: "Certified Fiber Optic Technician" },
-    { question: "What is the typical core diameter of single-mode fiber?", options: ["8-10 microns", "50 microns", "62.5 microns", "100 microns"], answer: "8-10 microns" },
-    { question: "Which light source is typically used in single-mode fiber?", options: ["Laser", "LED", "Incandescent", "Fluorescent"], answer: "Laser" },
-    { question: "What is the main advantage of fiber optic cables over copper cables?", options: ["Higher bandwidth", "Lower cost", "Easier installation", "More flexibility"], answer: "Higher bandwidth" },
-    { question: "What is an OTDR used for?", options: ["Testing fiber optic cable continuity", "Measuring light intensity", "Splicing fiber optic cables", "Cleaning fiber connectors"], answer: "Testing fiber optic cable continuity" },
-    { question: "Which type of fiber optic cable is primarily used for long-distance communication?", options: ["Single-mode", "Multi-mode", "Plastic Optical Fiber", "Hybrid fiber"], answer: "Single-mode" },
-    { question: "What is 'attenuation' in fiber optics?", options: ["Loss of signal strength", "Increase in bandwidth", "Measure of light source", "Amount of data sent"], answer: "Loss of signal strength" },
-    { question: "In fiber optics, what does a 'splice' refer to?", options: ["Joining two fibers together", "Connecting fiber to a switch", "Cutting fiber cable", "Increasing signal strength"], answer: "Joining two fibers together" },
-    { question: "Which device is used to join two optical fibers?", options: ["Fusion splicer", "OTDR", "Power meter", "Fiber cleaver"], answer: "Fusion splicer" },
-    { question: "What is 'backscatter' in fiber optics?", options: ["Light that is scattered back toward the source", "Light that passes through fiber", "Light absorbed by fiber", "Light emitted from a light source"], answer: "Light that is scattered back toward the source" },
-    // Additional questions here
+// Function to hold the correct answers
+const answerKey = [
+    "c", "a", "b", "b", "d", "a", "c", "b", "c", "a",
+    "b", "c", "a", "d", "b", "c", "a", "d", "c", "b", // Up to 20 questions
+    "a", "d", "c", "b", "a", "d", "c", "b", "a", "d",
+    "c", "a", "b", "b", "d", "a", "c", "b", "c", "a",
+    "b", "c", "a", "d", "b", "c", "a", "d", "c", "b" // Up to 50 questions
 ];
 
-function refreshPage() {
-    location.reload();
-}
+// Sample fiber optic exam questions with options
+const questions = [
+    "What is the main advantage of fiber optic cables over copper cables?",
+    "Which material is most commonly used for the core of fiber optic cables?",
+    "What does the cladding layer do in a fiber optic cable?",
+    "What term describes the reduction of signal strength in a fiber optic cable?",
+    "Which connector is commonly used in single-mode fiber networks?",
+    "What is the typical wavelength of light used in single-mode fiber optic cables?",
+    "Which device tests the quality of a fiber optic cable installation?",
+    "What does OTDR stand for?",
+    "In fiber optics, what is dispersion?",
+    "What is the purpose of fiber splicing?",
+    // Add 10 more for 20-question set
+    "What is attenuation in fiber optics?",
+    "How is light transmitted in fiber optics?",
+    "What is multimode fiber typically used for?",
+    "What is a primary cause of signal loss in fiber optic cables?",
+    "Which fiber type is suitable for long-distance communication?",
+    "What protective layer surrounds the cladding in a fiber cable?",
+    "What does WDM stand for in fiber optics?",
+    "What color is the jacket for single-mode fiber?",
+    "What is the main difference between single-mode and multimode fiber?",
+    "What is the purpose of fiber polishing?",
+    // Add 30 more for 50-question set
+    "Which type of fiber has a larger core?",
+    "What is mode in fiber optics?",
+    "Which is NOT a common connector type for fiber optics?",
+    "What is refraction?",
+    "How does fiber optic transmission compare with radio transmission?",
+    "What is a fiber optic splicing technique?",
+    "What does the acronym LED stand for?",
+    "How can you prevent signal loss?",
+    "What is the main benefit of WDM?",
+    "What color is the multimode fiber jacket?",
+    // Additional realistic questions can continue here...
+];
 
-// Set question count and start exam
-function setQuestionCount(count) {
-    totalQuestions = count;
-    shuffleQuestions();
-    renderQuestion();
-}
+// Options and correct answers for each question
+const options = [
+    ["Higher bandwidth", "Lower cost", "Longer distance", "Easier to install"],
+    ["Plastic", "Copper", "Glass", "Aluminum"],
+    ["Prevents data theft", "Reflects light", "Guides light", "Increases bandwidth"],
+    ["Reflection", "Attenuation", "Dispersion", "Interference"],
+    ["ST", "LC", "RJ-45", "SC"],
+    ["850 nm", "1310 nm", "1550 nm", "980 nm"],
+    ["Power meter", "Microscope", "OTDR", "Fiber identifier"],
+    ["Optical Testing Device Resource", "Optical Time Domain Reflectometer", "Optical Total Dispersion Rating", "Optical Transmission Data Record"],
+    ["Attenuation of signal", "Loss of signal", "Spread of pulses", "Reflection in cable"],
+    ["Connecting two fibers", "Bending cables", "Cleaning the core", "Testing signal loss"],
+    ["Loss of light signal", "Transmission of data", "Light bouncing", "Decreased signal strength"],
+    ["Through copper", "By LED or laser", "Via radio waves", "With microwave"],
+    ["For data centers", "For long-distance", "For short distance", "For cellular"],
+    ["Faulty connectors", "Core misalignment", "Fiber cladding", "Reflective loss"],
+    ["Single-mode", "Multimode", "Hybrid", "Both a and b"],
+    ["Core", "Buffer coating", "Connector", "Jacket"],
+    ["Wavelength Division Multiplexing", "Wide Data Method", "Width Design Mode", "Wireless Data Mode"],
+    ["Yellow", "Orange", "Aqua", "Red"],
+    ["Core size", "Cladding type", "Outer material", "Transmission type"],
+    ["To clean ends", "Ensure clarity", "Strengthen cable", "Reduce loss"],
+    // Remaining options for additional questions...
+];
 
-// Payment prompt for 50 questions
-function payFor50Questions() {
-    const confirmPayment = confirm("Pay 99 pesos to access 50 questions?");
-    if (confirmPayment) {
-        setQuestionCount(50);
+// Start exam function
+function startExam(num) {
+    const proceed = num === 50 ? confirm("You need to pay ₱99 to proceed with 50 questions. Do you want to continue?") : true;
+    if (!proceed) return;
+
+    const questionnaire = document.getElementById('questionnaire');
+    const questionsContainer = document.getElementById('questions-container');
+    questionsContainer.innerHTML = ''; // Clear previous questions
+    questionnaire.style.display = 'block';
+
+    for (let i = 0; i < num; i++) {
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.innerHTML = `<p>${i + 1}. ${questions[i]}</p>`;
+        
+        options[i].forEach((option, index) => {
+            const optionLabel = document.createElement('label');
+            optionLabel.innerHTML = `<input type="radio" name="question${i}" value="${String.fromCharCode(97 + index)}"> ${option}`;
+            questionDiv.appendChild(optionLabel);
+        });
+        questionsContainer.appendChild(questionDiv);
     }
 }
 
-// Shuffle questions for each exam
-function shuffleQuestions() {
-    questions.sort(() => Math.random() - 0.5);
-}
-
-// Render the question
-function renderQuestion() {
-    const questionSection = document.getElementById("question-section");
-    questionSection.innerHTML = "";
-    
-    const questionData = questions[currentQuestionIndex];
-    const questionElem = document.createElement("div");
-    questionElem.classList.add("question");
-    questionElem.innerText = questionData.question;
-    questionSection.appendChild(questionElem);
-    
-    const optionsDiv = document.createElement("div");
-    optionsDiv.classList.add("options");
-    questionData.options.forEach(option => {
-        const optionLabel = document.createElement("label");
-        optionLabel.innerHTML = `<input type="radio" name="option" value="${option}"> ${option}`;
-        optionsDiv.appendChild(optionLabel);
-    });
-    questionSection.appendChild(optionsDiv);
-
-    updateProgress();
-}
-
-// Update circular progress
-function updateProgress() {
-    const progressElement = document.getElementById("progress-text");
-    const progress = Math.round((currentQuestionIndex / totalQuestions) * 100);
-    progressElement.innerText = `${progress}%`;
-}
-
-// Function to handle Next Question button
-function nextQuestion() {
-    const selectedOption = document.querySelector('input[name="option"]:checked');
-    if (selectedOption) {
-        if (selectedOption.value === questions[currentQuestionIndex].answer) {
-            score++;
-        }
-        currentQuestionIndex++;
-        if (currentQuestionIndex < totalQuestions) {
-            renderQuestion();
-        } else {
-            finishExam();
-        }
-    } else {
-        alert("Please select an answer before proceeding.");
-    }
-}
-
-// Function to submit the exam
+// Submit Exam Function
 function submitExam() {
-    finishExam();
+    let score = 0;
+    const name = document.getElementById('name-input').value || "Participant";
+
+    // Calculate score
+    answerKey.slice(0, document.querySelectorAll('.question').length).forEach((answer, index) => {
+        const selected = document.querySelector(`input[name="question${index}"]:checked`);
+        if (selected && selected.value === answer) score += 5;
+    });
+
+    // Display certificate
+    document.getElementById('certificate').style.display = 'block';
+    document.getElementById('certificate-name').innerText = name;
+    document.getElementById('certificate-score').innerText = score;
 }
 
-// Function to finish the exam and display the certificate
-function finishExam() {
-    document.getElementById("exam-container").style.display = "none";
-    document.getElementById("print-section").style.display = "block";
-    document.getElementById("certificate").style.display = "block";
-    document.getElementById("cert-name").innerText = document.getElementById("name-input").value;
-    document.getElementById("cert-score").innerText = `${score} out of ${totalQuestions}`;
-}
+// Print Certificate Only
+function printCertificate() {
+    const printContents = document.getElementById('certificate').outerHTML;
+    const originalContents = document.body.innerHTML;
 
-// Function to print the results
-function printResults() {
+    document.body.innerHTML = printContents;
     window.print();
+    document.body.innerHTML = originalContents;
 }
-
-// Initialize the exam with default settings
-shuffleQuestions();
-renderQuestion();
 </script>
 
 </body>
