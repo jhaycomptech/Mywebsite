@@ -1,277 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cisco Exam</title>
-    <style>
-        /* Basic styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            text-align: center;
-            background-color: #add8e6; /* Light blue background */
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiber Optic CFOT Exam</title>
+<style>
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #add8e6; /* Light blue background */
+}
 
-        h1 {
-            color: #333;
-        }
+h1 {
+    color: #333;
+    text-align: center;
+}
 
-        #header {
-            margin: 20px auto;
-            width: 10in;
-            height: 2in;
-            background-image: url('https://t3.ftcdn.net/jpg/01/10/39/34/360_F_110393413_ve9rWniGDKUZWv5NbH96Kf9raN25hDhS.jpg'); /* Cisco Image */
-            background-size: cover;
-            border-radius: 8px;
-        }
+#header {
+    margin: 20px auto;
+    width: 10in;
+    height: 2in;
+    background-image: url('https://t3.ftcdn.net/jpg/01/10/39/34/360_F_110393413_ve9rWniGDKUZWv5NbH96Kf9raN25hDhS.jpg');
+    background-size: cover;
+    border-radius: 8px;
+}
 
-        .question-container {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
+.container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
 
-        .question {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            text-align: left;
-        }
+.exam-column, .video-column {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+}
 
-        .options {
-            text-align: left;
-        }
+.question-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
 
-        .options label {
-            display: block;
-            margin: 5px 0;
-            cursor: pointer;
-        }
+.question {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    text-align: left;
+}
 
-        button {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+.options {
+    text-align: left;
+}
 
-        button:hover {
-            background-color: #2980b9;
-        }
+.options label {
+    display: block;
+    margin: 5px 0;
+    cursor: pointer;
+}
 
-        .result {
-            font-size: 1.2em;
-            color: #2c3e50;
-            margin-top: 20px;
-        }
+button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
 
-        #print-section {
-            display: none; /* Hide print section initially */
-            margin-top: 40px;
-        }
+button:hover {
+    background-color: #2980b9;
+}
 
-        #certificate {
-            border: 2px solid #3498db;
-            padding: 20px;
-            display: none; /* Hide certificate initially */
-        }
+.result {
+    font-size: 1.2em;
+    color: #2c3e50;
+    margin-top: 20px;
+}
 
-        #progress-bar {
-            height: 20px;
-            background-color: #3498db;
-            margin: 10px 0;
-            border-radius: 5px;
-        }
+#print-section {
+    display: none;
+    margin-top: 40px;
+}
 
-        #progress {
-            height: 100%;
-            width: 0;
-            background-color: #2980b9;
-            border-radius: 5px;
-        }
-    </style>
-    <script src="https://cdn.fast.com/js/fast.com.js"></script>
+#certificate {
+    border: 2px solid #3498db;
+    padding: 20px;
+    display: none;
+}
+
+#progress-bar-container {
+    display: flex;
+    justify-content: left;
+    margin: 20px 0;
+}
+
+.circle-progress {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 10px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 20px; /* Position on the left side */
+}
+
+.circle-progress::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #3498db;
+    clip-path: circle(50% at 50% 50%);
+}
+
+.progress-text {
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.question-count-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.question-count-buttons button {
+    background-color: #2ecc71;
+    font-weight: bold;
+}
+
+.question-count-buttons button:hover {
+    background-color: #27ae60;
+}
+
+#refresh-button {
+    font-size: 1.2em;
+    color: #3498db;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+</style>
 </head>
 <body>
 
-    <div id="header"></div>
-    <h1>Cisco Exam for Everyone because Practice makes Perfect!</h1>
-    <div id="exam-container" class="question-container">
-        <input type="text" id="name-input" placeholder="Enter your name" required>
-        <div id="progress-bar">
-            <div id="progress"></div>
-        </div>
-        <div id="question-section">
-            <!-- Questions will be dynamically added here -->
-        </div>
+<div id="header"></div>
+<h1>Fiber Optic Exam</h1>
+<p style="text-align:center;">Practice your knowledge and skills to prepare for the CFOT certification!</p>
 
-        <button onclick="nextQuestion()">Next Question</button>
-        <button onclick="submitExam()" id="submit-button" style="display:none;">Submit Exam</button>
-        <button onclick="finishExam()" id="finish-button">Finish Exam</button>
-    </div>
+<div class="question-count-buttons">
+    <button onclick="setQuestionCount(10)">10 Questions</button>
+    <button onclick="setQuestionCount(20)">20 Questions</button>
+    <button onclick="payFor50Questions()">50 Questions - Pay 99 Pesos</button>
+    <button id="refresh-button" onclick="refreshPage()">&#x21bb;</button>
+</div>
 
-    <div id="result" class="result"></div>
-
-    <div id="print-section" class="question-container">
-        <h2>Certificate of Appreciation</h2>
-        <div id="certificate">
-            <p>This certifies that <strong id="cert-name"></strong></p>
-            <p>has successfully completed the Cisco Exam.</p>
-            <p>Your score: <strong id="cert-score"></strong> out of 50.</p>
-        </div>
-        <button onclick="printResults()">Print Certificate</button>
-    </div>
-
-    <script>
-        const questions = [
-            { question: "What is the purpose of a router?", options: ["To route packets", "To store data", "To create web pages", "To display images"], answer: "To route packets" },
-            { question: "What does the OSI model stand for?", options: ["Open System Interconnection", "Operating System Interaction", "Open Source Interchange", "Online System Interruption"], answer: "Open System Interconnection" },
-            { question: "Which layer is responsible for end-to-end communication?", options: ["Transport", "Network", "Session", "Application"], answer: "Transport" },
-            { question: "Which device works at Layer 2 of the OSI model?", options: ["Switch", "Router", "Firewall", "Server"], answer: "Switch" },
-            { question: "What is an IP address used for?", options: ["Identifying devices on a network", "Accessing the internet", "Storing data", "Deleting data"], answer: "Identifying devices on a network" },
-            { question: "What does DHCP stand for?", options: ["Dynamic Host Configuration Protocol", "Dynamic Host Control Protocol", "Dynamic Host Communication Protocol", "Direct Host Configuration Protocol"], answer: "Dynamic Host Configuration Protocol" },
-            { question: "What protocol is used to send emails?", options: ["SMTP", "IMAP", "HTTP", "FTP"], answer: "SMTP" },
-            { question: "Which layer of the OSI model does TCP operate?", options: ["Transport", "Network", "Data Link", "Application"], answer: "Transport" },
-            { question: "What is the primary function of a firewall?", options: ["To filter incoming and outgoing traffic", "To store data", "To encrypt communications", "To create backups"], answer: "To filter incoming and outgoing traffic" },
-            { question: "What is the maximum length of a CAT5e Ethernet cable?", options: ["100 meters", "200 meters", "300 meters", "50 meters"], answer: "100 meters" },
-            { question: "Which protocol is used for secure communication over a computer network?", options: ["HTTPS", "FTP", "HTTP", "SMTP"], answer: "HTTPS" },
-            { question: "What is NAT?", options: ["Network Address Translation", "Network Access Translation", "Network Allocation Translation", "Network Application Translation"], answer: "Network Address Translation" },
-            { question: "What is the primary purpose of a VPN?", options: ["To secure internet connections", "To speed up internet", "To create backups", "To allow remote access"], answer: "To secure internet connections" },
-            { question: "Which of the following is an application layer protocol?", options: ["HTTP", "IP", "TCP", "UDP"], answer: "HTTP" },
-            { question: "What does a subnet mask do?", options: ["Defines the network and host portions of an IP address", "Secures the network", "Filters data packets", "Connects devices"], answer: "Defines the network and host portions of an IP address" },
-            { question: "What is an example of a class C IP address?", options: ["192.168.1.1", "10.0.0.1", "172.16.0.1", "255.255.255.0"], answer: "192.168.1.1" },
-            { question: "Which device connects multiple networks together?", options: ["Router", "Switch", "Hub", "Bridge"], answer: "Router" },
-            { question: "What is the purpose of DNS?", options: ["To translate domain names to IP addresses", "To secure data", "To monitor network traffic", "To store websites"], answer: "To translate domain names to IP addresses" },
-            { question: "What is a common port number for HTTPS?", options: ["443", "80", "21", "25"], answer: "443" },
-            { question: "What technology is used to connect a computer to the internet wirelessly?", options: ["Wi-Fi", "Ethernet", "Bluetooth", "DSL"], answer: "Wi-Fi" },
-            { question: "Which layer of the OSI model is responsible for data encryption?", options: ["Presentation", "Application", "Session", "Transport"], answer: "Presentation" },
-            { question: "What is the primary purpose of a proxy server?", options: ["To act as an intermediary for requests", "To speed up network traffic", "To filter spam", "To backup data"], answer: "To act as an intermediary for requests" },
-            { question: "Which of the following is a widely used network protocol?", options: ["TCP/IP", "UDP", "HTTP", "All of the above"], answer: "All of the above" },
-            { question: "What does 'ping' command do?", options: ["Checks connectivity to a network", "Measures bandwidth", "Sends data", "Creates a backup"], answer: "Checks connectivity to a network" },
-            { question: "What is the function of the transport layer?", options: ["Ensures complete data transfer", "Routes packets", "Handles sessions", "Encrypts data"], answer: "Ensures complete data transfer" },
-            { question: "What type of address is used for a specific device on a local network?", options: ["MAC Address", "IP Address", "URL", "Hostname"], answer: "IP Address" },
-            { question: "What does the term 'latency' refer to?", options: ["Delay in data transmission", "Speed of data transfer", "Packet loss", "Data corruption"], answer: "Delay in data transmission" },
-            { question: "Which protocol is used to securely connect to a remote server?", options: ["SSH", "FTP", "Telnet", "SMTP"], answer: "SSH" },
-            { question: "What is a DHCP server responsible for?", options: ["Assigning IP addresses", "Filtering traffic", "Monitoring network", "Routing packets"], answer: "Assigning IP addresses" },
-            { question: "What is a characteristic of a mesh topology?", options: ["Every device is connected to every other device", "All devices are connected to a single hub", "Devices are connected in a line", "Devices are connected in a circle"], answer: "Every device is connected to every other device" },
-            { question: "What type of malware disguises itself as legitimate software?", options: ["Trojan", "Virus", "Worm", "Adware"], answer: "Trojan" },
-            { question: "What does SSL stand for?", options: ["Secure Sockets Layer", "Simple Sockets Layer", "Secure Security Layer", "Simple Security Layer"], answer: "Secure Sockets Layer" },
-            { question: "What is a common use for a network switch?", options: ["Connecting devices on a local network", "Routing internet traffic", "Filtering incoming data", "Backing up data"], answer: "Connecting devices on a local network" },
-            { question: "What does 'bandwidth' refer to?", options: ["The maximum rate of data transfer", "The amount of data stored", "The number of devices connected", "The speed of the internet"], answer: "The maximum rate of data transfer" },
-            { question: "Which type of attack involves overwhelming a network?", options: ["DDoS", "Phishing", "Spoofing", "Sniffing"], answer: "DDoS" },
-            { question: "What is an example of a public IP address?", options: ["8.8.8.8", "192.168.1.1", "10.0.0.1", "172.16.0.1"], answer: "8.8.8.8" },
-            { question: "What is a network protocol?", options: ["A set of rules for communication", "A physical connection", "A type of cable", "A device"], answer: "A set of rules for communication" },
-            { question: "What is the main function of an access point?", options: ["To connect wireless devices to a network", "To filter network traffic", "To route data", "To store data"], answer: "To connect wireless devices to a network" },
-            { question: "What does 'throughput' measure?", options: ["Actual data transfer rate", "Maximum data transfer rate", "Delay in data transfer", "Packet loss"], answer: "Actual data transfer rate" },
-            { question: "Which of the following is used to monitor network traffic?", options: ["Network Analyzer", "Router", "Firewall", "Switch"], answer: "Network Analyzer" },
-            { question: "What is the primary purpose of a load balancer?", options: ["Distributing network traffic", "Storing data", "Encrypting data", "Monitoring performance"], answer: "Distributing network traffic" },
-            { question: "What is an example of a private IP address?", options: ["192.168.0.1", "172.16.0.1", "10.0.0.1", "All of the above"], answer: "All of the above" },
-            { question: "What is the function of a VPN?", options: ["Creating a secure connection over the internet", "Increasing internet speed", "Filtering traffic", "Assigning IP addresses"], answer: "Creating a secure connection over the internet" },
-            { question: "What is the primary function of an IDS?", options: ["To detect intrusions", "To encrypt data", "To route traffic", "To store logs"], answer: "To detect intrusions" },
-            { question: "What is the purpose of an SSL certificate?", options: ["To secure communication between a web browser and server", "To monitor network traffic", "To filter data", "To store data"], answer: "To secure communication between a web browser and server" },
-            { question: "What is a common network troubleshooting tool?", options: ["Ping", "Traceroute", "Netstat", "All of the above"], answer: "All of the above" }
-        ];
-
-        let score = 0;
-        let currentQuestionIndex = 0;
-
-        // Function to shuffle questions
-        function shuffleQuestions() {
-            for (let i = questions.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [questions[i], questions[j]] = [questions[j], questions[i]];
-            }
-        }
-
-        // Function to render the current question
-        function renderQuestion() {
-            const question = questions[currentQuestionIndex];
-            const questionSection = document.getElementById("question-section");
-            questionSection.innerHTML = `<div class="question"><p>${currentQuestionIndex + 1}. ${question.question}</p></div>`;
-            const optionsDiv = document.createElement("div");
-            optionsDiv.className = "options";
-            question.options.forEach(option => {
-                const optionLabel = document.createElement("label");
-                optionLabel.innerHTML = `<input type="radio" name="question${currentQuestionIndex}" value="${option}"> ${option}`;
-                optionsDiv.appendChild(optionLabel);
-            });
-            questionSection.appendChild(optionsDiv);
-
-            // Update progress bar
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-            document.getElementById("progress").style.width = `${progress}%`;
+<div class="container">
+    <!-- Exam Column -->
+    <div class="exam-column">
+        <div id="exam-container" class="question-container">
+            <input type="text" id="name-input" placeholder="Enter your name" required>
+            <div id="progress-bar-container">
+                <div class="circle-progress">
+                    <div class="progress-text" id="progress-text">0%</div>
+                </div>
+                <div id="question-section">
+                    <!-- Questions will be dynamically added here -->
+                </div>
+            </div>
             
-            // Show submit button after first question
-            if (currentQuestionIndex === 0) {
-                document.getElementById("submit-button").style.display = "inline-block";
-            }
-        }
+            <button onclick="nextQuestion()">Next Question</button>
+            <button onclick="submitExam()" id="submit-button" style="display:none;">Submit Exam</button>
+            <button onclick="finishExam()" id="finish-button" style="display:none;">Finish Exam</button>
+        </div>
 
-        // Function to handle the next question
-        function nextQuestion() {
-            const selectedOption = document.querySelector(`input[name="question${currentQuestionIndex}"]:checked`);
-            if (selectedOption) {
-                if (selectedOption.value === questions[currentQuestionIndex].answer) {
-                    score++;
-                } else {
-                    alert(`Incorrect! The correct answer is: ${questions[currentQuestionIndex].answer}`);
-                }
-                currentQuestionIndex++;
-                if (currentQuestionIndex < questions.length) {
-                    renderQuestion();
-                } else {
-                    document.getElementById("exam-container").style.display = "none";
-                    document.getElementById("print-section").style.display = "block";
-                    document.getElementById("cert-name").innerText = document.getElementById("name-input").value;
-                    document.getElementById("cert-score").innerText = `${score}`;
-                    document.getElementById("certificate").style.display = "block"; // Show certificate
-                }
-            } else {
-                alert("Please select an answer.");
-            }
-        }
+        <div id="result" class="result"></div>
 
-        // Function to submit the exam and calculate the score
-        function submitExam() {
-            while (currentQuestionIndex < questions.length) {
-                const selectedOption = document.querySelector(`input[name="question${currentQuestionIndex}"]:checked`);
-                if (selectedOption) {
-                    if (selectedOption.value === questions[currentQuestionIndex].answer) {
-                        score++;
-                    }
-                }
-                currentQuestionIndex++;
-            }
-            document.getElementById("exam-container").style.display = "none";
-            document.getElementById("print-section").style.display = "block";
-            document.getElementById("cert-name").innerText = document.getElementById("name-input").value;
-            document.getElementById("cert-score").innerText = `${score}`;
-            document.getElementById("certificate").style.display = "block"; // Show certificate
-        }
+        <div id="print-section" class="question-container">
+            <h2>Certificate of Appreciation</h2>
+            <div id="certificate">
+                <p>This certifies that <strong id="cert-name"></strong></p>
+                <p>has successfully completed the Fiber Optic CFOT Exam.</p>
+                <p>Your score: <strong id="cert-score"></strong> out of <strong id="cert-total"></strong>.</p>
+            </div>
+            <button onclick="printResults()">Print Certificate</button>
+        </div>
+    </div>
 
-        // Function to finish the exam
-        function finishExam() {
-            const confirmFinish = confirm("Are you sure you want to finish the exam? You will not be able to continue.");
-            if (confirmFinish) {
-                submitExam();
-            }
-        }
+    <!-- Video Column -->
+    <div class="video-column">
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/watch?v=Tm8LGxTLtQk" 
+                    title="Fiber Optic Training" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div>
 
-        // Function to print results
-        function printResults() {
-            window.print();
-        }
+<script>
+let score = 0;
+let currentQuestionIndex = 0;
+let totalQuestions = 10; // Default to 10 questions
 
-        // Start the exam
-        shuffleQuestions();
-        renderQuestion();
-    </script>
+const questions = [
+    { question: "What does CFOT stand for?", options: ["Certified Fiber Optic Technician", "Certified Fiber Optic Trainer", "Central Fiber Optic Training", "Core Fiber Optical Technician"], answer: "Certified Fiber Optic Technician" },
+    { question: "What is the typical core diameter of single-mode fiber?", options: ["8-10 microns", "50 microns", "62.5 microns", "100 microns"], answer: "8-10 microns" },
+    { question: "Which light source is typically used in single-mode fiber?", options: ["Laser", "LED", "Incandescent", "Fluorescent"], answer: "Laser" },
+    { question: "What is the main advantage of fiber optic cables over copper cables?", options: ["Higher bandwidth", "Lower cost", "Easier installation", "More flexibility"], answer: "Higher bandwidth" },
+    { question: "What is an OTDR used for?", options: ["Testing fiber optic cable continuity", "Measuring light intensity", "Splicing fiber optic cables", "Cleaning fiber connectors"], answer: "Testing fiber optic cable continuity" },
+    { question: "Which type of fiber optic cable is primarily used for long-distance communication?", options: ["Single-mode", "Multi-mode", "Plastic Optical Fiber", "Hybrid fiber"], answer: "Single-mode" },
+    { question: "What is 'attenuation' in fiber optics?", options: ["Loss of signal strength", "Increase in bandwidth", "Measure of light source", "Amount of data sent"], answer: "Loss of signal strength" },
+    { question: "In fiber optics, what does a 'splice' refer to?", options: ["Joining two fibers together", "Connecting fiber to a switch", "Cutting fiber cable", "Increasing signal strength"], answer: "Joining two fibers together" },
+    { question: "Which device is used to join two optical fibers?", options: ["Fusion splicer", "OTDR", "Power meter", "Fiber cleaver"], answer: "Fusion splicer" },
+    { question: "What is 'backscatter' in fiber optics?", options: ["Light that is scattered back toward the source", "Light that passes through fiber", "Light absorbed by fiber", "Light emitted from a light source"], answer: "Light that is scattered back toward the source" },
+    // Additional questions here
+];
+
+function refreshPage() {
+    location.reload();
+}
+
+// Set question count and start exam
+function setQuestionCount(count) {
+    totalQuestions = count;
+    shuffleQuestions();
+    renderQuestion();
+}
+
+// Payment prompt for 50 questions
+function payFor50Questions() {
+    const confirmPayment = confirm("Pay 99 pesos to access 50 questions?");
+    if (confirmPayment) {
+        setQuestionCount(50);
+    }
+}
+
+// Shuffle questions for each exam
+function shuffleQuestions() {
+    questions.sort(() => Math.random() - 0.5);
+}
+
+// Render the question
+function renderQuestion() {
+    const questionSection = document.getElementById("question-section");
+    questionSection.innerHTML = "";
+    
+    const questionData = questions[currentQuestionIndex];
+    const questionElem = document.createElement("div");
+    questionElem.classList.add("question");
+    questionElem.innerText = questionData.question;
+    questionSection.appendChild(questionElem);
+    
+    const optionsDiv = document.createElement("div");
+    optionsDiv.classList.add("options");
+    questionData.options.forEach(option => {
+        const optionLabel = document.createElement("label");
+        optionLabel.innerHTML = `<input type="radio" name="option" value="${option}"> ${option}`;
+        optionsDiv.appendChild(optionLabel);
+    });
+    questionSection.appendChild(optionsDiv);
+
+    updateProgress();
+}
+
+// Update circular progress
+function updateProgress() {
+    const progressElement = document.getElementById("progress-text");
+    const progress = Math.round((currentQuestionIndex / totalQuestions) * 100);
+    progressElement.innerText = `${progress}%`;
+}
+
+// Function to handle Next Question button
+function nextQuestion() {
+    const selectedOption = document.querySelector('input[name="option"]:checked');
+    if (selectedOption) {
+        if (selectedOption.value === questions[currentQuestionIndex].answer) {
+            score++;
+        }
+        currentQuestionIndex++;
+        if (currentQuestionIndex < totalQuestions) {
+            renderQuestion();
+        } else {
+            finishExam();
+        }
+    } else {
+        alert("Please select an answer before proceeding.");
+    }
+}
+
+// Function to submit the exam
+function submitExam() {
+    finishExam();
+}
+
+// Function to finish the exam and display the certificate
+function finishExam() {
+    document.getElementById("exam-container").style.display = "none";
+    document.getElementById("print-section").style.display = "block";
+    document.getElementById("certificate").style.display = "block";
+    document.getElementById("cert-name").innerText = document.getElementById("name-input").value;
+    document.getElementById("cert-score").innerText = `${score} out of ${totalQuestions}`;
+}
+
+// Function to print the results
+function printResults() {
+    window.print();
+}
+
+// Initialize the exam with default settings
+shuffleQuestions();
+renderQuestion();
+</script>
+
 </body>
 </html>
