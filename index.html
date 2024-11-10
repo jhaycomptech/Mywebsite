@@ -1,44 +1,131 @@
-    function updateProgress(index) {
-        const progressWidth = ((index + 1) / selectedQuestions.length) * 100;
-        document.getElementById("progress").style.width = progressWidth + "%";
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networking Quiz (Cisco)</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-    function submitExam() {
-        selectedQuestions.forEach((question, index) => {
-            const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
-            const optionsContainer = document.getElementById(`options${index}`);
+    <div class="container">
+        <h2>Networking Quiz (Cisco)</h2>
 
-            if (selectedOption) {
-                if (selectedOption.value === question.answer) {
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question-box">
+                <p>1. What does the acronym 'LAN' stand for?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q1" value="Local Area Network"> Local Area Network</label><br>
+                    <label><input type="radio" name="q1" value="Large Area Network"> Large Area Network</label><br>
+                    <label><input type="radio" name="q1" value="Linked Access Network"> Linked Access Network</label><br>
+                    <label><input type="radio" name="q1" value="Logical Area Network"> Logical Area Network</label>
+                </div>
+                <p class="correct-answer" id="correct-q1" style="display:none;">Correct answer: Local Area Network</p>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-box">
+                <p>2. Which protocol is used to send an email?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q2" value="SMTP"> SMTP</label><br>
+                    <label><input type="radio" name="q2" value="HTTP"> HTTP</label><br>
+                    <label><input type="radio" name="q2" value="FTP"> FTP</label><br>
+                    <label><input type="radio" name="q2" value="TCP"> TCP</label>
+                </div>
+                <p class="correct-answer" id="correct-q2" style="display:none;">Correct answer: SMTP</p>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-box">
+                <p>3. What is the purpose of a router in a network?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q3" value="To route data between networks"> To route data between networks</label><br>
+                    <label><input type="radio" name="q3" value="To route data within a local network"> To route data within a local network</label><br>
+                    <label><input type="radio" name="q3" value="To store files"> To store files</label><br>
+                    <label><input type="radio" name="q3" value="To convert protocols"> To convert protocols</label>
+                </div>
+                <p class="correct-answer" id="correct-q3" style="display:none;">Correct answer: To route data between networks</p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="button" id="submit">Submit</button>
+        </form>
+
+        <div id="result"></div>
+        <div class="explanation"></div>
+
+        <!-- Progress Circle -->
+        <div class="circle-wrap" id="circle" style="--percentage: 0%;">
+            <div class="inside" id="percentage">0%</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submit').addEventListener('click', function() {
+            let resultDiv = document.getElementById('result');
+            let explanationDiv = document.querySelector('.explanation');
+            let circle = document.getElementById('circle');
+            let percentageText = document.getElementById('percentage');
+            let score = 0;
+            let totalQuestions = 3; // Update this count when you add more questions
+            let explanation = '';
+
+            // Question 1
+            let q1 = document.querySelector('input[name="q1"]:checked');
+            if (q1) {
+                if (q1.value === 'Local Area Network') {
                     score++;
-                    selectedOption.parentElement.classList.add("correct");
+                    explanation += '<p>1. Correct! LAN stands for <strong>Local Area Network</strong>.</p>';
                 } else {
-                    selectedOption.parentElement.classList.add("incorrect");
+                    explanation += '<p>1. Incorrect! The correct answer is <strong>Local Area Network</strong>.</p>';
+                    document.getElementById('correct-q1').style.display = 'block'; // Show correct answer
                 }
+            } else {
+                explanation += '<p>1. You didn’t answer this question!</p>';
+                document.getElementById('correct-q1').style.display = 'block'; // Show correct answer
             }
 
-            // Disable all options after selection
-            Array.from(optionsContainer.querySelectorAll("input")).forEach(input => {
-                input.disabled = true;
-            });
+            // Question 2
+            let q2 = document.querySelector('input[name="q2"]:checked');
+            if (q2) {
+                if (q2.value === 'SMTP') {
+                    score++;
+                    explanation += '<p>2. Correct! <strong>SMTP</strong> is used to send emails across the Internet.</p>';
+                } else {
+                    explanation += '<p>2. Incorrect! The correct answer is <strong>SMTP</strong>.</p>';
+                    document.getElementById('correct-q2').style.display = 'block'; // Show correct answer
+                }
+            } else {
+                explanation += '<p>2. You didn’t answer this question!</p>';
+                document.getElementById('correct-q2').style.display = 'block'; // Show correct answer
+            }
+
+            // Question 3
+            let q3 = document.querySelector('input[name="q3"]:checked');
+            if (q3) {
+                if (q3.value === 'To route data between networks') {
+                    score++;
+                    explanation += '<p>3. Correct! A router is used to route data between networks.</p>';
+                } else {
+                    explanation += '<p>3. Incorrect! The correct answer is <strong>To route data between networks</strong>.</p>';
+                    document.getElementById('correct-q3').style.display = 'block'; // Show correct answer
+                }
+            } else {
+                explanation += '<p>3. You didn’t answer this question!</p>';
+                document.getElementById('correct-q3').style.display = 'block'; // Show correct answer
+            }
+
+            // Display score and explanations
+            let percentage = (score / totalQuestions) * 100;
+            explanationDiv.innerHTML = explanation;
+            resultDiv.innerHTML = `Your score is ${score} out of ${totalQuestions} (${percentage}%)`;
+
+            // Update the progress circle
+            circle.style.setProperty('--percentage', `${percentage}%`);
+            percentageText.innerHTML = `${Math.round(percentage)}%`;
         });
-
-        document.getElementById("exam-container").style.display = "none";
-        document.getElementById("submit-button").style.display = "none";
-        document.getElementById("certificate-button").style.display = "inline-block";
-        document.getElementById("total-questions").textContent = selectedQuestions.length;
-        document.getElementById("cert-name").textContent = document.getElementById("username").value;
-        document.getElementById("cert-score").textContent = score;
-        document.getElementById("certificate").style.display = "block";
-    }
-
-    function finishExam() {
-        if (confirm("Are you sure you want to finish the exam?")) {
-            submitExam();
-        }
-    }
-
-    function printCertificate() {
-        window.print();
-    }
-</script>
+    </script>
+</body>
+</html>
