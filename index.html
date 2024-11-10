@@ -1,0 +1,44 @@
+    function updateProgress(index) {
+        const progressWidth = ((index + 1) / selectedQuestions.length) * 100;
+        document.getElementById("progress").style.width = progressWidth + "%";
+    }
+
+    function submitExam() {
+        selectedQuestions.forEach((question, index) => {
+            const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+            const optionsContainer = document.getElementById(`options${index}`);
+
+            if (selectedOption) {
+                if (selectedOption.value === question.answer) {
+                    score++;
+                    selectedOption.parentElement.classList.add("correct");
+                } else {
+                    selectedOption.parentElement.classList.add("incorrect");
+                }
+            }
+
+            // Disable all options after selection
+            Array.from(optionsContainer.querySelectorAll("input")).forEach(input => {
+                input.disabled = true;
+            });
+        });
+
+        document.getElementById("exam-container").style.display = "none";
+        document.getElementById("submit-button").style.display = "none";
+        document.getElementById("certificate-button").style.display = "inline-block";
+        document.getElementById("total-questions").textContent = selectedQuestions.length;
+        document.getElementById("cert-name").textContent = document.getElementById("username").value;
+        document.getElementById("cert-score").textContent = score;
+        document.getElementById("certificate").style.display = "block";
+    }
+
+    function finishExam() {
+        if (confirm("Are you sure you want to finish the exam?")) {
+            submitExam();
+        }
+    }
+
+    function printCertificate() {
+        window.print();
+    }
+</script>
