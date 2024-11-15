@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiber Optic Homepage</title>
+    <title>Fiber Optic Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,159 +20,203 @@
             text-align: center;
             font-size: 24px;
             font-weight: bold;
+            position: relative;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #ffffff;
-            padding: 10px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        nav a {
-            margin: 0 15px;
-            font-size: 18px;
-            text-decoration: none;
-            color: #000;
-        }
-
-        nav a:hover {
-            color: #4267B2;
+        header img {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
         }
 
         .container {
             padding: 20px;
         }
 
-        .section {
-            background-color: white;
+        .quiz {
+            background-color: transparent;
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 5px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .quiz-answer {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .quiz-answer p {
+        .quiz p {
+            font-size: 18px;
+            margin-bottom: 15px;
             font-weight: bold;
-            width: 250px;
-            margin-right: 20px;
+            color: yellow;
         }
 
         .options {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            background-color: transparent;
         }
 
-        form input[type="radio"] {
-            margin-right: 8px;
+        .options label {
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: yellow;
         }
 
-        .image-container {
-            text-align: center;
-        }
-
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border: 2px solid #ddd;
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            font-size: 16px;
+            color: white;
+            background-color: #4267B2;
+            border: none;
             border-radius: 5px;
-            padding: 5px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #365899;
+        }
+
+        /* Progress Bar Styles */
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: neon green;
+            border-radius: 10px;
+        }
+
+        .summary {
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
     <header>
-        Fiber Optic Homepage
+        <img src="https://fiberopticexam.wordpress.com/wp-content/uploads/2024/11/banner.png" alt="Fiber Optic Banner">
+        Fiber Optic Quiz
     </header>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#history">History</a>
-        <a href="#contact">Contact Us</a>
-        <a href="#colorcoding">Color Coding</a>
-    </nav>
-
     <div class="container">
-        <!-- Home Section: Fiber Optic Quiz -->
-        <div id="home" class="section">
-            <h2>Fiber Optic Quiz</h2>
-            <p>Test your knowledge on fiber optics!</p>
-
-            <form id="quizForm">
-                <div class="quiz-answer">
-                    <p>1. What is fiber optic technology?</p>
-                    <div class="options">
-                        <label><input type="radio" name="q1" value="A" required> A type of cable</label>
-                        <label><input type="radio" name="q1" value="B"> A type of glass</label>
-                        <label><input type="radio" name="q1" value="C"> A type of data transmission</label>
-                        <label><input type="radio" name="q1" value="D"> A type of copper wire</label>
-                    </div>
-                </div>
-
-                <!-- Repeat similar structure for all questions up to 20 -->
-
-                <button type="submit">Submit Answers</button>
-            </form>
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
         </div>
 
-        <!-- History Section remains the same -->
-        <div id="history" class="section">
-            <h2>History of Fiber Optics</h2>
-            <p>Fiber optics began as a theoretical concept in the early 19th century...</p>
+        <div id="quiz-container" class="quiz">
+            <p id="question">Loading question...</p>
+            <div id="options" class="options"></div>
+            <button id="nextBtn" style="display: none;">Next</button>
         </div>
 
-        <!-- Contact Us Section remains the same -->
-        <div id="contact" class="section">
-            <h2>Contact Us</h2>
-            <form id="contactForm">
-                <input type="text" name="name" placeholder="Your Name" required><br>
-                <textarea name="message" placeholder="Your Message" required></textarea><br>
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
-
-        <!-- Color Coding Section -->
-        <div id="colorcoding" class="section">
-            <h2>Fiber Optic Color Coding</h2>
-            <p>Understanding the color coding in fiber optic cables is essential for installation and maintenance.</p>
-            <div class="image-container">
-                <img src="https://ftthfiberoptic.com/wp-content/uploads/2023/10/1-What-is-Fiber-Optic-Color-Code%EF%BC%9F.png" alt="Fiber Optic Color Coding">
-            </div>
+        <div id="results" class="summary" style="display: none;">
+            <h3>Your Quiz Results</h3>
+            <p id="score"></p>
+            <h4>Answers:</h4>
+            <div id="answers"></div>
         </div>
     </div>
 
     <script>
-        document.getElementById("quizForm").addEventListener("submit", function (event) {
-            event.preventDefault();
-            let score = 0;
+        const questions = [
+            { q: "What is fiber optic technology?", a: "C", options: ["A type of cable", "A type of glass", "A type of data transmission", "A type of copper wire"] },
+            { q: "What is the primary material used in fiber optic cables?", a: "B", options: ["Copper", "Glass", "Plastic", "Steel"] },
+            { q: "What is the core purpose of fiber optics?", a: "A", options: ["High-speed data transfer", "Low energy consumption", "Increased light intensity", "Ease of installation"] },
+            { q: "What is the advantage of fiber optic cables over copper cables?", a: "A", options: ["Higher bandwidth", "Lower cost", "Easier installation", "Better durability"] },
+            { q: "What type of light is used in fiber optic cables?", a: "B", options: ["Radio waves", "Laser light", "LED light", "Infrared light"] },
+            { q: "Which of the following is a common use for fiber optics?", a: "C", options: ["Electrical wiring", "Air conditioning", "Telecommunications", "Hydraulic systems"] },
+            { q: "Fiber optic cables are used in:", a: "B", options: ["Electricity generation", "Internet and communications", "Water purification", "Food processing"] },
+            { q: "What does the core of a fiber optic cable do?", a: "A", options: ["Carries the light signal", "Protects the signal", "Insulates the cable", "Holds the outer layer"] },
+            { q: "Which of the following is a property of fiber optic cables?", a: "D", options: ["Resistance to corrosion", "Electrical conductivity", "Flexibility", "High data transfer rates"] },
+            { q: "What is total internal reflection?", a: "C", options: ["The reflection of light off the surface", "Light bouncing off a metal surface", "Light being repeatedly reflected within the fiber", "The bending of light through the air"] },
+            { q: "What is the outer layer of a fiber optic cable called?", a: "B", options: ["Core", "Cladding", "Jacket", "Insulation"] },
+            { q: "What is the speed advantage of fiber optics?", a: "A", options: ["Faster than copper cables", "Slower than copper cables", "Equal to copper cables", "Faster than wireless signals"] },
+            { q: "What is a fiber optic transceiver?", a: "C", options: ["A device that converts light to electrical signals", "A type of cable", "A device that converts electrical signals to light", "A light source"] },
+            { q: "Which of the following is NOT a type of fiber optic cable?", a: "D", options: ["Single-mode", "Multi-mode", "Plastic optical fiber", "Copper optical fiber"] },
+            { q: "What is a common material used for fiber optic cable cladding?", a: "B", options: ["Copper", "Glass", "Plastic", "Steel"] },
+            { q: "Which of the following is the most advanced fiber optic cable?", a: "A", options: ["Single-mode fiber", "Multi-mode fiber", "Plastic optical fiber", "Hybrid fiber"] },
+            { q: "What is the primary function of fiber optics in the medical field?", a: "A", options: ["Endoscopy", "Surgery", "Monitoring vital signs", "Dental care"] },
+            { q: "What is an optical fiber amplifier?", a: "B", options: ["An electronic device used in fiber networks", "A device that amplifies the light signal in fiber optics", "A laser source for fiber optics", "A tool for cutting fiber cables"] },
+            { q: "Why are fiber optic cables less susceptible to interference?", a: "C", options: ["They use electrical signals", "They are shielded", "They transmit light", "They are insulated"] },
+            { q: "How is fiber optic technology used in undersea cables?", a: "D", options: ["For underwater light communication", "To prevent electromagnetic interference", "To supply power to underwater devices", "To transmit data over long distances"] }
+        ];
 
-            if (document.querySelector('input[name="q1"]:checked').value === "C") score++;
-            // Add similar checks for other questions
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const userAnswers = [];
+        const questionEl = document.getElementById("question");
+        const optionsEl = document.getElementById("options");
+        const nextBtn = document.getElementById("nextBtn");
+        const progressBar = document.getElementById("progressBar");
+        const resultsEl = document.getElementById("results");
+        const scoreEl = document.getElementById("score");
+        const answersEl = document.getElementById("answers");
 
-            alert("Your score: " + score + "/20");
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionEl.textContent = currentQuestion.q;
+            optionsEl.innerHTML = "";
+
+            currentQuestion.options.forEach((option, index) => {
+                const label = document.createElement("label");
+                label.innerHTML = `<input type="radio" name="answer" value="${String.fromCharCode(65 + index)}"> ${option}`;
+                optionsEl.appendChild(label);
+            });
+
+            nextBtn.style.display = "none";
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const progress = (currentQuestionIndex / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        optionsEl.addEventListener("click", (e) => {
+            if (e.target.name === "answer") {
+                userAnswers[currentQuestionIndex] = e.target.value;
+                nextBtn.style.display = "inline-block";
+            }
         });
 
-        document.getElementById("contactForm").addEventListener("submit", function (event) {
-            event.preventDefault();
-            alert("Thank you for your message!");
-            document.getElementById("contactForm").reset();
+        nextBtn.addEventListener("click", () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
         });
+
+        function showResults() {
+            let correctAnswers = 0;
+            let answerDetails = "";
+
+            questions.forEach((question, index) => {
+                if (userAnswers[index] === question.a) {
+                    correctAnswers++;
+                }
+                answerDetails += `<p>Q${index + 1}: ${question.q}<br>Answer: ${question.options[question.a.charCodeAt(0) - 65]}</p><hr>`;
+            });
+
+            scoreEl.textContent = `Your score: ${correctAnswers}/${questions.length}`;
+            answersEl.innerHTML = answerDetails;
+            resultsEl.style.display = "block";
+            document.getElementById("quiz-container").style.display = "none";
+        }
+
+        loadQuestion();
     </script>
 </body>
 
