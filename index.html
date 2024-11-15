@@ -1,223 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiber Optic Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #e9ebee;
-        }
-
-        header {
-            background-color: #4267B2;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            position: relative;
-        }
-
-        header img {
-            width: 100%;
-            height: auto;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: -1;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-        .quiz {
-            background-color: transparent;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .quiz p {
-            font-size: 18px;
-            margin-bottom: 15px;
-            font-weight: bold;
-            color: yellow;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            background-color: transparent;
-        }
-
-        .options label {
-            margin-bottom: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            color: yellow;
-        }
-
-        button {
-            margin-top: 15px;
-            padding: 10px 15px;
-            font-size: 16px;
-            color: white;
-            background-color: #4267B2;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #365899;
-        }
-
-        /* Progress Bar Styles */
-        .progress-container {
-            width: 100%;
-            height: 20px;
-            background-color: #ddd;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background-color: neon green;
-            border-radius: 10px;
-        }
-
-        .summary {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Praktis makes pekpek (Cisco ni filex)</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header>
-        <img src="https://fiberopticexam.wordpress.com/wp-content/uploads/2024/11/banner.png" alt="Fiber Optic Banner">
-        Fiber Optic Quiz
-    </header>
 
     <div class="container">
-        <!-- Progress Bar -->
-        <div class="progress-container">
-            <div id="progressBar" class="progress-bar"></div>
-        </div>
+        <h2>Praktis makes perfect fiber optic exam</h2>
 
-        <div id="quiz-container" class="quiz">
-            <p id="question">Loading question...</p>
-            <div id="options" class="options"></div>
-            <button id="nextBtn" style="display: none;">Next</button>
-        </div>
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question-box">
+                <p>1. What does the acronym 'LAN' stand for?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q1" value="Local Area Network"> Local Area Network</label><br>
+                    <label><input type="radio" name="q1" value="Large Area Network"> Large Area Network</label><br>
+                    <label><input type="radio" name="q1" value="Linked Access Network"> Linked Access Network</label><br>
+                    <label><input type="radio" name="q1" value="Logical Area Network"> Logical Area Network</label>
+                </div>
+                <p class="correct-answer" id="correct-q1" style="display:none;">Correct answer: Local Area Network</p>
+            </div>
 
-        <div id="results" class="summary" style="display: none;">
-            <h3>Your Quiz Results</h3>
-            <p id="score"></p>
-            <h4>Answers:</h4>
-            <div id="answers"></div>
+            <!-- Question 2 -->
+            <div class="question-box">
+                <p>2. Which protocol is used to send an email?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q2" value="SMTP"> SMTP</label><br>
+                    <label><input type="radio" name="q2" value="HTTP"> HTTP</label><br>
+                    <label><input type="radio" name="q2" value="FTP"> FTP</label><br>
+                    <label><input type="radio" name="q2" value="TCP"> TCP</label>
+                </div>
+                <p class="correct-answer" id="correct-q2" style="display:none;">Correct answer: SMTP</p>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-box">
+                <p>3. What is the purpose of a router in a network?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q3" value="To route data between networks"> To route data between networks</label><br>
+                    <label><input type="radio" name="q3" value="To route data within a local network"> To route data within a local network</label><br>
+                    <label><input type="radio" name="q3" value="To store files"> To store files</label><br>
+                    <label><input type="radio" name="q3" value="To convert protocols"> To convert protocols</label>
+                </div>
+                <p class="correct-answer" id="correct-q3" style="display:none;">Correct answer: To route data between networks</p>
+            </div>
+			
+			<!-- Question 4 -->
+            <div class="question-box">
+                <p>4. sino ang pumatay ka lapo lapo?</p>
+                <div class="answers">
+                    <label><input type="radio" name="q4" value="To route data between networks"> To route data between networks</label><br>
+                    <label><input type="radio" name="q4" value="To route data within a local network"> To route data within a local network</label><br>
+                    <label><input type="radio" name="q4" value="To store files"> To store files</label><br>
+                    <label><input type="radio" name="q4" value="To convert protocols"> To convert protocols</label>
+                </div>
+                <p class="correct-answer" id="correct-q4" style="display:none;">Correct answer: To route data between networks</p>
+            </div>
+			
+
+            <!-- Submit Button -->
+            <button type="button" id="submit">Submit</button>
+        </form>
+
+        <div id="result"></div>
+        <div class="explanation"></div>
+
+        <!-- Progress Circle -->
+        <div class="circle-wrap" id="circle" style="--percentage: 0%;">
+            <div class="inside" id="percentage">0%</div>
         </div>
     </div>
 
     <script>
-        const questions = [
-            { q: "What is fiber optic technology?", a: "C", options: ["A type of cable", "A type of glass", "A type of data transmission", "A type of copper wire"] },
-            { q: "What is the primary material used in fiber optic cables?", a: "B", options: ["Copper", "Glass", "Plastic", "Steel"] },
-            { q: "What is the core purpose of fiber optics?", a: "A", options: ["High-speed data transfer", "Low energy consumption", "Increased light intensity", "Ease of installation"] },
-            { q: "What is the advantage of fiber optic cables over copper cables?", a: "A", options: ["Higher bandwidth", "Lower cost", "Easier installation", "Better durability"] },
-            { q: "What type of light is used in fiber optic cables?", a: "B", options: ["Radio waves", "Laser light", "LED light", "Infrared light"] },
-            { q: "Which of the following is a common use for fiber optics?", a: "C", options: ["Electrical wiring", "Air conditioning", "Telecommunications", "Hydraulic systems"] },
-            { q: "Fiber optic cables are used in:", a: "B", options: ["Electricity generation", "Internet and communications", "Water purification", "Food processing"] },
-            { q: "What does the core of a fiber optic cable do?", a: "A", options: ["Carries the light signal", "Protects the signal", "Insulates the cable", "Holds the outer layer"] },
-            { q: "Which of the following is a property of fiber optic cables?", a: "D", options: ["Resistance to corrosion", "Electrical conductivity", "Flexibility", "High data transfer rates"] },
-            { q: "What is total internal reflection?", a: "C", options: ["The reflection of light off the surface", "Light bouncing off a metal surface", "Light being repeatedly reflected within the fiber", "The bending of light through the air"] },
-            { q: "What is the outer layer of a fiber optic cable called?", a: "B", options: ["Core", "Cladding", "Jacket", "Insulation"] },
-            { q: "What is the speed advantage of fiber optics?", a: "A", options: ["Faster than copper cables", "Slower than copper cables", "Equal to copper cables", "Faster than wireless signals"] },
-            { q: "What is a fiber optic transceiver?", a: "C", options: ["A device that converts light to electrical signals", "A type of cable", "A device that converts electrical signals to light", "A light source"] },
-            { q: "Which of the following is NOT a type of fiber optic cable?", a: "D", options: ["Single-mode", "Multi-mode", "Plastic optical fiber", "Copper optical fiber"] },
-            { q: "What is a common material used for fiber optic cable cladding?", a: "B", options: ["Copper", "Glass", "Plastic", "Steel"] },
-            { q: "Which of the following is the most advanced fiber optic cable?", a: "A", options: ["Single-mode fiber", "Multi-mode fiber", "Plastic optical fiber", "Hybrid fiber"] },
-            { q: "What is the primary function of fiber optics in the medical field?", a: "A", options: ["Endoscopy", "Surgery", "Monitoring vital signs", "Dental care"] },
-            { q: "What is an optical fiber amplifier?", a: "B", options: ["An electronic device used in fiber networks", "A device that amplifies the light signal in fiber optics", "A laser source for fiber optics", "A tool for cutting fiber cables"] },
-            { q: "Why are fiber optic cables less susceptible to interference?", a: "C", options: ["They use electrical signals", "They are shielded", "They transmit light", "They are insulated"] },
-            { q: "How is fiber optic technology used in undersea cables?", a: "D", options: ["For underwater light communication", "To prevent electromagnetic interference", "To supply power to underwater devices", "To transmit data over long distances"] }
-        ];
+        document.getElementById('submit').addEventListener('click', function() {
+            let resultDiv = document.getElementById('result');
+            let explanationDiv = document.querySelector('.explanation');
+            let circle = document.getElementById('circle');
+            let percentageText = document.getElementById('percentage');
+            let score = 0;
+            let totalQuestions = 4; // Update this count when you add more questions
+            let explanation = '';
 
-        let currentQuestionIndex = 0;
-        let score = 0;
-        const userAnswers = [];
-        const questionEl = document.getElementById("question");
-        const optionsEl = document.getElementById("options");
-        const nextBtn = document.getElementById("nextBtn");
-        const progressBar = document.getElementById("progressBar");
-        const resultsEl = document.getElementById("results");
-        const scoreEl = document.getElementById("score");
-        const answersEl = document.getElementById("answers");
-
-        function loadQuestion() {
-            const currentQuestion = questions[currentQuestionIndex];
-            questionEl.textContent = currentQuestion.q;
-            optionsEl.innerHTML = "";
-
-            currentQuestion.options.forEach((option, index) => {
-                const label = document.createElement("label");
-                label.innerHTML = `<input type="radio" name="answer" value="${String.fromCharCode(65 + index)}"> ${option}`;
-                optionsEl.appendChild(label);
-            });
-
-            nextBtn.style.display = "none";
-            updateProgressBar();
-        }
-
-        function updateProgressBar() {
-            const progress = (currentQuestionIndex / questions.length) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
-
-        optionsEl.addEventListener("click", (e) => {
-            if (e.target.name === "answer") {
-                userAnswers[currentQuestionIndex] = e.target.value;
-                nextBtn.style.display = "inline-block";
-            }
-        });
-
-        nextBtn.addEventListener("click", () => {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        });
-
-        function showResults() {
-            let correctAnswers = 0;
-            let answerDetails = "";
-
-            questions.forEach((question, index) => {
-                if (userAnswers[index] === question.a) {
-                    correctAnswers++;
+            // Question 1
+            let q1 = document.querySelector('input[name="q1"]:checked');
+            if (q1) {
+                if (q1.value === 'Local Area Network') {
+                    score++;
+                    explanation += '<p>1. Correct! LAN stands for <strong>Local Area Network</strong>.</p>';
+                } else {
+                    explanation += '<p>1. Incorrect! The correct answer is <strong>Local Area Network</strong>.</p>';
+                    document.getElementById('correct-q1').style.display = 'block'; // Show correct answer
                 }
-                answerDetails += `<p>Q${index + 1}: ${question.q}<br>Answer: ${question.options[question.a.charCodeAt(0) - 65]}</p><hr>`;
-            });
+            } else {
+                explanation += '<p>1. You didn’t answer this question!</p>';
+                document.getElementById('correct-q1').style.display = 'block'; // Show correct answer
+            }
 
-            scoreEl.textContent = `Your score: ${correctAnswers}/${questions.length}`;
-            answersEl.innerHTML = answerDetails;
-            resultsEl.style.display = "block";
-            document.getElementById("quiz-container").style.display = "none";
-        }
+            // Question 2
+            let q2 = document.querySelector('input[name="q2"]:checked');
+            if (q2) {
+                if (q2.value === 'SMTP') {
+                    score++;
+                    explanation += '<p>2. Correct! <strong>SMTP</strong> is used to send emails across the Internet.</p>';
+                } else {
+                    explanation += '<p>2. Incorrect! The correct answer is <strong>SMTP</strong>.</p>';
+                    document.getElementById('correct-q2').style.display = 'block'; // Show correct answer
+                }
+            } else {
+                explanation += '<p>2. You didn’t answer this question!</p>';
+                document.getElementById('correct-q2').style.display = 'block'; // Show correct answer
+            }
 
-        loadQuestion();
+            // Question 3
+            let q3 = document.querySelector('input[name="q3"]:checked');
+            if (q3) {
+                if (q3.value === 'To route data between networks') {
+                    score++;
+                    explanation += '<p>3. Correct! A router is used to route data between networks.</p>';
+                } else {
+                    explanation += '<p>3. Incorrect! The correct answer is <strong>To route data between networks</strong>.</p>';
+                    document.getElementById('correct-q3').style.display = 'block'; // Show correct answer
+                }
+            } else {
+                explanation += '<p>3. You didn’t answer this question!</p>';
+                document.getElementById('correct-q3').style.display = 'block'; // Show correct answer
+            }
+			// Question 4
+            let q4 = document.querySelector('input[name="q4"]:checked');
+            if (q4) {
+                if (q4.value === 'To route data between networks') {
+                    score++;
+                    explanation += '<p>4. Correct! A router is used to route data between networks.</p>';
+                } else {
+                    explanation += '<p>4. Incorrect! The correct answer is <strong>To route data between networks</strong>.</p>';
+                    document.getElementById('correct-q4').style.display = 'block'; // Show correct answer
+                }
+            } else {
+                explanation += '<p>4. You didn’t answer this question!</p>';
+                document.getElementById('correct-q3').style.display = 'block'; // Show correct answer
+            }
+
+            // Display score and explanations
+            let percentage = (score / totalQuestions) * 100;
+            explanationDiv.innerHTML = explanation;
+            resultDiv.innerHTML = `Your score is ${score} out of ${totalQuestions} (${percentage}%)`;
+
+            // Update the progress circle
+            circle.style.setProperty('--percentage', `${percentage}%`);
+            percentageText.innerHTML = `${Math.round(percentage)}%`;
+        });
     </script>
 </body>
-
 </html>
